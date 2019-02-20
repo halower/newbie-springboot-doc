@@ -32,8 +32,8 @@
  * [采集SpringBoot项目的日志](sc/ELK采集SpringBoot项目日志.md)
 * 数据源配置
  * [数据源配置](sc/数据源配置.md) 
-* Spring Data JPA效验
- * [Spring Data JPA效验](sc/Spring Data JPA效验.md) 
+* 服务端数据校验
+ * [SpringDataJPA校验](sc/服务端数据校验.md) 
 
 * 其它
  * [乐观锁](basic/乐观锁.md)
