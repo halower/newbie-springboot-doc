@@ -1,7 +1,10 @@
 ### 服务调用
-!>默认拥有已经注册到服务中心的service-hello、client-hello两个服务了，client-hello的端口号为8762。client-hello要调用service-hello。
+!>默认拥有已经注册到服务中心的service-hello（服务提供者）、client-hello（服务消费者）两个服务了，client-hello的端口号为8762。client-hello服务要调用service-hello服务。
+
+#### 服务器中Eureka注册中心的地址为：192.168.2.137:8761
+
 ##### service-hello服务
-在controller中创建接口：
+在controller中创建restful接口：
 
 ```
 @GetMapping("/service-hello/{str}")  
@@ -17,7 +20,7 @@ public String serviceHello(@PathVariable String str){
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-openfeign</artifactId>
-    <version>2.0.2.RELEASE</version>
+    <version>2.1.0.RELEASE</version>
 </dependency>
 ```
 2.在启动类上添加注解：
@@ -29,7 +32,7 @@ public String serviceHello(@PathVariable String str){
 3.创建一个interface：
 
 ```
-@FeignClient(name = "service-hello") //被调用服务的名字
+@FeignClient(name = "service-hello")  //name值为被调用服务注册到服务中心的名字
 public interface ClientService {
     @GetMapping("/service-hello/{str}") //被调用服务的Restful接口
     String echo(@PathVariable(value = "str") String str);
@@ -46,6 +49,7 @@ public String clientHello(@PathVariable(value = "str") String str){
 
 在浏览器访问client-hello的接口，如：http://localhost:8762/client-hello/helloWorld ,可以在浏览器中看见打印出了 helloWorld 。说明我们通过client-hello服务调用了service-hello服务的接口，并且还传递了一个String类型的参数。
 
+!> 目前spring cloud集成了dubbo但是不稳定，还在测试阶段中。
 
 ### 参数传递
 ?>在服务调用时，通常会传递一些参数。下文使用service-hello和client-hello两个服务针对传递对象和文件这两种情况分别举了例子。
@@ -95,7 +99,7 @@ public String clientHello(){
 
 访问 http://localhost:8762/client-hello :
 
-![image](../_img/feign.PNG)		
+![](../_img/feign.png)		
 
 
 #### 传递文件

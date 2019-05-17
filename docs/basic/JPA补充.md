@@ -24,7 +24,7 @@ public class BlogKey implements Serializable {
 @Entity
 @IdClass(BlogKey.class)
 @EqualsAndHashCode(callSuper = false)
-public class Blog extends FullAudited {
+public class Blog extends BaseAudited {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id", nullable = false)
     private int blogId;
